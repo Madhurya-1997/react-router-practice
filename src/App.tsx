@@ -29,11 +29,11 @@ function Layout() {
             <Link to="/about">About</Link>
           </li>
           <li>
-            <Link to="/dashboard">Dashboard</Link>
+            <Link to="/dashboard/mb97ghy/Madhurya">Dashboard</Link>
           </li>
-          {/* <li>
-            <Link to="/food">Get food item</Link>
-          </li> */}
+          <li>
+            <Link to="/food/banana">Get food item</Link>
+          </li>
           <li>
             <Link to="/nothing-here">Nothing Here</Link>
           </li>
