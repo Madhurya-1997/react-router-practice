@@ -8,7 +8,7 @@ export default function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
-          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="dashboard/:username/:fullName" element={<Dashboard />} />
           <Route path="food/:name" element={<Food authenticated={true} />} />
           <Route path="*" element={<NoMatch />} />
         </Route>
@@ -20,8 +20,6 @@ export default function App() {
 function Layout() {
   return (
     <div>
-      {/* A "layout route" is a good place to put markup you want to
-          share across all the pages on your site, like navigation. */}
       <nav>
         <ul>
           <li>
@@ -74,9 +72,12 @@ function About() {
 }
 
 function Dashboard() {
+  const {username, fullName} = useParams();
   return (
     <div>
       <h2>Dashboard</h2>
+      <div>Username: {username}</div>
+      <div>Full Name: {fullName}</div>
     </div>
   );
 }
