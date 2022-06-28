@@ -5,7 +5,7 @@ export default function App() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route path="/" element={<Search />}>
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="dashboard/:username/:fullName" element={<Dashboard />} />
@@ -16,7 +16,17 @@ export default function App() {
     </div>
   );
 }
-
+function Search() {
+  const [keyword, setKeyword] = React.useState("");
+  return (
+    <>
+      <h2>Type your fav food: </h2>
+      <input type='text' onChange={e => setKeyword(e.target.value)} />
+      <Link to={`food/${keyword}`}>Take me !</Link>
+      <Outlet />
+    </>
+  )
+}
 function Layout() {
   return (
     <div>
