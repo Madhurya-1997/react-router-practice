@@ -24,11 +24,11 @@ export default function App() {
     </div>
   );
 }
-function FoodSearch(props: any) {
+function FoodSearch() {
   const { search } = useParams();
   return <div>I searched for {search} </div>;
 }
-function Search(props: any) {
+function Search() {
   const [keyword, setKeyword] = React.useState('');
   const navigate = useNavigate();
   const handleClick = () => {
