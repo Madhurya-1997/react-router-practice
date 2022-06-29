@@ -1,5 +1,12 @@
 import * as React from 'react';
-import { Routes, Route, Outlet, Link, useParams } from 'react-router-dom';
+import {
+  Routes,
+  Route,
+  Outlet,
+  Link,
+  useParams,
+  useNavigate,
+} from 'react-router-dom';
 
 export default function App() {
   return (
@@ -9,23 +16,33 @@ export default function App() {
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="dashboard/:username/:fullName" element={<Dashboard />} />
-          <Route path="food/:name" element={<Food authenticated={true} />} />
+          <Route path="food" element={<Food authenticated={true} />} />
+          <Route path="food/:search" element={<FoodSearch />} />
           <Route path="*" element={<NoMatch />} />
         </Route>
       </Routes>
     </div>
   );
 }
-function Search() {
-  const [keyword, setKeyword] = React.useState("");
+function FoodSearch(props: any) {
+  const { search } = useParams();
+  return <div>I searched for {search} </div>;
+}
+function Search(props: any) {
+  const [keyword, setKeyword] = React.useState('');
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate(`/food/${keyword}`);
+  };
   return (
     <>
       <h2>Type your fav food: </h2>
-      <input type='text' onChange={e => setKeyword(e.target.value)} />
-      <Link to={`food/${keyword}`}>Take me !</Link>
+      <input type="text" onChange={(e) => setKeyword(e.target.value)} />
+      {/* <Link to={`food/${keyword}`}>Take me !</Link> */}
+      <button onClick={handleClick}>Take me !</button>
       <Outlet />
     </>
-  )
+  );
 }
 function Layout() {
   return (
@@ -57,10 +74,11 @@ function Layout() {
 }
 
 function Food(props: any) {
-  const { name } = useParams();
+  // const { name } = useParams();
   return (
     <div>
-      I love to eat {name} and my login status: {props.authenticated.toString()}
+      {/* I love to eat {name} */}
+      <div>Login status: {props.authenticated.toString()}</div>
     </div>
   );
 }
@@ -82,7 +100,7 @@ function About() {
 }
 
 function Dashboard() {
-  const {username, fullName} = useParams();
+  const { username, fullName } = useParams();
   return (
     <div>
       <h2>Dashboard</h2>
